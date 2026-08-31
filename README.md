@@ -2,6 +2,10 @@
 
 PowerShell and batch automation for triggering Microsoft Configuration Manager client actions and evaluating configuration baselines.
 
+## 🔎 Keywords
+
+`sccm` `mecm` `configuration-manager` `powershell` `powershell-script` `windows` `endpoint-management` `system-administration` `it-automation` `sccm-automation`
+
 ## 📌 Version
 
 **v1.0.0 — Initial Release**
