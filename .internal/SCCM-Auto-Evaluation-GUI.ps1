@@ -60,7 +60,7 @@ $SccmFixScript = Join-Path $BackendDirectory "SCCM-Stuck-Fix.bat"
 $form = New-Object System.Windows.Forms.Form
 
 $form.Text = "SCCM Auto Evaluation - Jagadish V"
-$form.Size = New-Object System.Drawing.Size(1100,700)
+$form.Size = New-Object System.Drawing.Size(1100,750)
 $form.StartPosition = "CenterScreen"
 $form.FormBorderStyle = "FixedSingle"
 $form.MaximizeBox = $false
@@ -125,11 +125,56 @@ $version.Font = New-Object System.Drawing.Font(
 
 $version.ForeColor = [System.Drawing.Color]::White
 
-$version.Location = New-Object System.Drawing.Point(850,35)
+$version.Location = New-Object System.Drawing.Point(835,35)
 
 $version.AutoSize = $true
 
 $header.Controls.Add($version)
+
+
+# ------------------------------------------------------------
+# Theme Selector
+# ------------------------------------------------------------
+
+$themeLabel = New-Object System.Windows.Forms.Label
+
+$themeLabel.Text = "Theme:"
+
+$themeLabel.Font = New-Object System.Drawing.Font(
+    "Segoe UI",
+    9
+)
+
+$themeLabel.ForeColor = [System.Drawing.Color]::White
+
+$themeLabel.Location = New-Object System.Drawing.Point(600,34)
+
+$themeLabel.AutoSize = $true
+
+$header.Controls.Add($themeLabel)
+
+$themeCombo = New-Object System.Windows.Forms.ComboBox
+
+$themeCombo.DropDownStyle = [System.Windows.Forms.ComboBoxStyle]::DropDownList
+
+[void]$themeCombo.Items.Add("Dark")
+
+[void]$themeCombo.Items.Add("Light")
+
+[void]$themeCombo.Items.Add("Transparent")
+
+$themeCombo.SelectedIndex = 0
+
+$themeCombo.Font = New-Object System.Drawing.Font(
+    "Segoe UI",
+    9
+)
+
+$themeCombo.Location = New-Object System.Drawing.Point(650,29)
+
+$themeCombo.Size = New-Object System.Drawing.Size(160,30)
+
+$header.Controls.Add($themeCombo)
 
 # ------------------------------------------------------------
 # Left Panel
@@ -139,7 +184,7 @@ $leftPanel = New-Object System.Windows.Forms.Panel
 
 $leftPanel.Location = New-Object System.Drawing.Point(15,100)
 
-$leftPanel.Size = New-Object System.Drawing.Size(300,500)
+$leftPanel.Size = New-Object System.Drawing.Size(300,550)
 
 $leftPanel.BackColor = [System.Drawing.Color]::White
 
@@ -219,8 +264,11 @@ $btnStuck = New-ActionButton `
 $btnUserPolicy = New-ActionButton `
     "User Policy Information" 385
 
+$btnOpenConfigMgr = New-ActionButton `
+    "Open Configuration Manager" 440
+
 $btnClear = New-ActionButton `
-    "Clear Activity Log" 440
+    "Clear Activity Log" 495
 
 # ------------------------------------------------------------
 # Right Panel
@@ -230,7 +278,7 @@ $rightPanel = New-Object System.Windows.Forms.Panel
 
 $rightPanel.Location = New-Object System.Drawing.Point(330,100)
 
-$rightPanel.Size = New-Object System.Drawing.Size(740,500)
+$rightPanel.Size = New-Object System.Drawing.Size(740,550)
 
 $rightPanel.BackColor = [System.Drawing.Color]::White
 
@@ -317,7 +365,7 @@ $rightPanel.Controls.Add($logBox)
 
 $progress = New-Object System.Windows.Forms.ProgressBar
 
-$progress.Location = New-Object System.Drawing.Point(20,420)
+$progress.Location = New-Object System.Drawing.Point(20,470)
 
 $progress.Size = New-Object System.Drawing.Size(700,25)
 
@@ -328,6 +376,128 @@ $progress.Maximum = 100
 $progress.Value = 0
 
 $rightPanel.Controls.Add($progress)
+
+
+# ------------------------------------------------------------
+# Theme Management
+# ------------------------------------------------------------
+
+$script:CurrentTheme = "Dark"
+
+function Set-ControlTheme {
+
+    param(
+        [System.Windows.Forms.Control]$Control,
+        [string]$Theme
+    )
+
+    if ($Theme -eq "Light") {
+
+        $form.BackColor = [System.Drawing.Color]::FromArgb(245,245,245)
+        $header.BackColor = [System.Drawing.Color]::FromArgb(35,45,60)
+        $leftPanel.BackColor = [System.Drawing.Color]::White
+        $rightPanel.BackColor = [System.Drawing.Color]::White
+        $logBox.BackColor = [System.Drawing.Color]::FromArgb(35,35,35)
+        $logBox.ForeColor = [System.Drawing.Color]::White
+
+        $title.ForeColor = [System.Drawing.Color]::White
+        $subtitle.ForeColor = [System.Drawing.Color]::LightGray
+        $version.ForeColor = [System.Drawing.Color]::White
+        $themeLabel.ForeColor = [System.Drawing.Color]::White
+
+        $section.ForeColor = [System.Drawing.Color]::FromArgb(35,45,60)
+        $statusTitle.ForeColor = [System.Drawing.Color]::FromArgb(35,45,60)
+        $logTitle.ForeColor = [System.Drawing.Color]::FromArgb(35,45,60)
+        $statusLabel.ForeColor = [System.Drawing.Color]::FromArgb(35,45,60)
+
+        $form.Opacity = 1.0
+    }
+    elseif ($Theme -eq "Transparent") {
+
+        $form.BackColor = [System.Drawing.Color]::FromArgb(235,240,245)
+        $header.BackColor = [System.Drawing.Color]::FromArgb(35,45,60)
+        $leftPanel.BackColor = [System.Drawing.Color]::FromArgb(235,240,245)
+        $rightPanel.BackColor = [System.Drawing.Color]::FromArgb(235,240,245)
+        $logBox.BackColor = [System.Drawing.Color]::FromArgb(25,25,25)
+        $logBox.ForeColor = [System.Drawing.Color]::White
+
+        $title.ForeColor = [System.Drawing.Color]::White
+        $subtitle.ForeColor = [System.Drawing.Color]::Gainsboro
+        $version.ForeColor = [System.Drawing.Color]::White
+        $themeLabel.ForeColor = [System.Drawing.Color]::White
+
+        $section.ForeColor = [System.Drawing.Color]::FromArgb(35,45,60)
+        $statusTitle.ForeColor = [System.Drawing.Color]::FromArgb(35,45,60)
+        $logTitle.ForeColor = [System.Drawing.Color]::FromArgb(35,45,60)
+        $statusLabel.ForeColor = [System.Drawing.Color]::FromArgb(35,45,60)
+
+        # WinForms does not provide true per-control alpha blending.
+        # Use form opacity for a reliable transparent-style appearance.
+        $form.Opacity = 0.90
+    }
+    else {
+
+        $form.BackColor = [System.Drawing.Color]::FromArgb(30,34,40)
+        $header.BackColor = [System.Drawing.Color]::FromArgb(20,25,32)
+        $leftPanel.BackColor = [System.Drawing.Color]::FromArgb(43,48,56)
+        $rightPanel.BackColor = [System.Drawing.Color]::FromArgb(43,48,56)
+        $logBox.BackColor = [System.Drawing.Color]::FromArgb(15,18,22)
+        $logBox.ForeColor = [System.Drawing.Color]::White
+
+        $title.ForeColor = [System.Drawing.Color]::White
+        $subtitle.ForeColor = [System.Drawing.Color]::LightGray
+        $version.ForeColor = [System.Drawing.Color]::White
+        $themeLabel.ForeColor = [System.Drawing.Color]::White
+
+        $section.ForeColor = [System.Drawing.Color]::White
+        $statusTitle.ForeColor = [System.Drawing.Color]::White
+        $logTitle.ForeColor = [System.Drawing.Color]::White
+        $statusLabel.ForeColor = [System.Drawing.Color]::White
+
+        $form.Opacity = 1.0
+    }
+
+    foreach ($button in @(
+        $btnActions,
+        $btnBaselines,
+        $btnFull,
+        $btnHealth,
+        $btnConfig,
+        $btnStuck,
+        $btnUserPolicy,
+        $btnOpenConfigMgr,
+        $btnClear
+    )) {
+
+        if ($Theme -eq "Dark") {
+
+            $button.BackColor = [System.Drawing.Color]::FromArgb(55,62,72)
+            $button.ForeColor = [System.Drawing.Color]::White
+        }
+        elseif ($Theme -eq "Transparent") {
+
+            $button.BackColor = [System.Drawing.Color]::FromArgb(220,225,230)
+            $button.ForeColor = [System.Drawing.Color]::FromArgb(25,30,35)
+        }
+        else {
+
+            $button.BackColor = [System.Drawing.Color]::White
+            $button.ForeColor = [System.Drawing.Color]::FromArgb(35,45,60)
+        }
+    }
+
+    $themeCombo.BackColor = [System.Drawing.Color]::White
+    $themeCombo.ForeColor = [System.Drawing.Color]::FromArgb(35,45,60)
+}
+
+$themeCombo.Add_SelectedIndexChanged({
+
+    $script:CurrentTheme = [string]$themeCombo.SelectedItem
+
+    Set-ControlTheme -Control $form -Theme $script:CurrentTheme
+
+    Write-Log "Theme changed to: $script:CurrentTheme"
+})
 
 # ------------------------------------------------------------
 # Logging Function
@@ -469,6 +639,24 @@ function Open-ConfigurationManager {
         Write-Log $_.Exception.Message
     }
 }
+
+
+# ------------------------------------------------------------
+# Open Configuration Manager Button
+# ------------------------------------------------------------
+
+$btnOpenConfigMgr.Add_Click({
+
+    $statusLabel.Text = "● Opening Configuration Manager"
+
+    $progress.Value = 0
+
+    Open-ConfigurationManager
+
+    $progress.Value = 100
+
+    $statusLabel.Text = "● Configuration Manager Opened"
+})
 
 # ------------------------------------------------------------
 # Run All SCCM Actions
@@ -945,6 +1133,12 @@ Write-Log "Existing SCCM scripts are unchanged."
 Write-Log "GUI is ready."
 
 Write-Log "=========================================="
+
+# ------------------------------------------------------------
+# Apply Initial Theme
+# ------------------------------------------------------------
+
+Set-ControlTheme -Control $form -Theme "Dark"
 
 # ------------------------------------------------------------
 # Start GUI
