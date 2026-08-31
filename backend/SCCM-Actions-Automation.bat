@@ -1,9 +1,6 @@
 @echo off
 setlocal EnableExtensions
 
-@echo off
-setlocal EnableExtensions
-
 :: ==========================================================
 :: Configuration Manager - Actions Automation
 :: Author  : Jagadish V
