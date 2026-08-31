@@ -8,11 +8,34 @@ PowerShell and batch automation for triggering Microsoft Configuration Manager c
 
 ## 📌 Version
 
-**v1.0.0 — Initial Release**
+**v1.1.0 — Latest Release**
 
 **Author:** Jagadish V
 
 ---
+
+## 🆕 What's New in v1.1.0
+
+### 🎨 GUI Theme Support
+
+The SCCM Auto Evaluation GUI now supports three visual themes:
+
+- ☀️ **Light Mode** — Clean and bright interface.
+- 🌙 **Dark Mode** — Dark interface for comfortable use in low-light environments.
+- 🪟 **Transparent Mode** — Semi-transparent GUI using Windows window opacity.
+
+The theme can be changed directly from the GUI.
+
+### ⚙️ Open Configuration Manager
+
+A dedicated **Open Configuration Manager** button has been added to the GUI.
+
+Administrators can now open the Configuration Manager client interface directly without running an SCCM evaluation or client action.
+
+```text
+Open Configuration Manager
+          ↓
+Configuration Manager Client
 
 ## 📖 Overview
 
@@ -38,10 +61,14 @@ The tool is designed so administrators do not need to manually open PowerShell, 
 - 📊 Activity log
 - 📈 Evaluation progress indicator
 - 🖥️ Automatically open Configuration Manager after full evaluation
+- ⚙️ Open Configuration Manager directly from the GUI
+- ☀️ Light Mode
+- 🌙 Dark Mode
+- 🪟 Transparent Mode
 - 📁 Organized backend scripts
 - 👻 Hidden internal GUI implementation
 
----
+----
 
 ## 🚀 Quick Start
 
