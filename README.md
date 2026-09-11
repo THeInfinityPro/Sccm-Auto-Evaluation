@@ -8,11 +8,23 @@ PowerShell and batch automation for triggering Microsoft Configuration Manager c
 
 ## 📌 Version
 
-**v1.2.0 — Latest Release**
+**v1.3.0 — Latest Release**
 
 **Author:** Jagadish V
 
 ---
+
+## New in v1.3.0
+
+- Updated and redesigned the SCCM Auto Evaluation GUI
+- Added Microsoft Notepad verification and removal
+- Added Microsoft Defender Security Intelligence update
+- Added MMPC fallback update option for Defender
+
+## Notes
+
+v1.3.0 improves the GUI experience while adding new Notepad and Microsoft Defender security management capabilities.
+
 
 ## 🆕 What's New in v1.2.0
 
