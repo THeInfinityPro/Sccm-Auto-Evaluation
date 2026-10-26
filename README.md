@@ -8,11 +8,47 @@ PowerShell and batch automation for triggering Microsoft Configuration Manager c
 
 ## 📌 Version
 
-**v1.3.0 — Latest Release**
+**v1.4.0 — Current Version**
 
 **Author:** Jagadish V
 
 ---
+
+## 🚀 What's New in v1.4.0
+
+SCCM Auto-Evaluation v1.4.0 introduces an updated GUI release based on the working v1.2.0 WinForms baseline.
+
+### 🖥️ GUI and Launcher
+
+- Updated the SCCM Auto-Evaluation GUI to version v1.4.0.
+- Updated the launcher to identify the v1.4.0 release.
+- Launches the GUI with administrator elevation.
+- Uses a temporary PowerShell execution policy for launching the GUI without changing the system-wide execution policy.
+- Retains the existing backend SCCM scripts and invokes them through the GUI.
+
+### 🛠️ Existing SCCM Utilities
+
+The project includes utilities for:
+
+- SCCM client actions and configuration baseline evaluation.
+- Configuration Manager Configuration tab troubleshooting.
+- SCCM client stuck troubleshooting.
+- SCCM service restart and health/version verification.
+- ClientAlwaysOnInternet configuration.
+- Microsoft Notepad verification and removal.
+- Microsoft Defender Security Intelligence updates, including an MMPC fallback option.
+- Local SCCM health checks through a separate GUI.
+
+### 📌 Release Notes
+
+Version 1.4.0 updates the GUI and launcher while retaining the existing backend script integrations. Review the individual scripts and their usage instructions before running administrative actions.
+
+---
+
+## 📜 Previous Releases
+
+- **v1.3.0** — GUI updates, Microsoft Notepad utilities, and Microsoft Defender Security Intelligence update options.
+- **v1.2.0** — Modern dashboard GUI, category-based navigation, themes, SCCM service controls, and client health utilities.
 
 ## New in v1.3.0
 
